@@ -1,4 +1,18 @@
-import { createStore } from 'redux';
-import toWatchReducer from './reducers/toWatchReducer';
+import { createStore, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import rootReducer from './reducers';
 
-export default createStore(toWatchReducer);
+// function logger(store) {
+//     return function (next) {
+//         return function (action) {
+//             console.log('Action is working', action)
+//             fetch('/')
+//             .then(() => next(action))
+//         }
+//     }
+// }
+
+const middleWare = applyMiddleware(logger)
+
+export default createStore(rootReducer, composeWithDevTools(middleWare));

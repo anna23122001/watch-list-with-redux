@@ -7,7 +7,9 @@ import api from '../../watch-service'
 import './WatchList.css'
 
 function WatchList() {
-  const movies = useSelector((store) => store.movies);
+  const movies = useSelector((store) => store.moviesList.movies);
+  // второй вариант с деструктуризацией двойной
+  // const {moviesList: {movies}} = useSelector((store) => store);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,8 +26,6 @@ function WatchList() {
           <WatchItem
             key={movie.id}
             movie={movie}
-            // onDelete={deleteMovie}
-            // onToggle={toggleMovie}
           />
         )
       })}

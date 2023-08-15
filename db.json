@@ -15,16 +15,46 @@
   ],
   "watch": [
     {
-      "title": "Аватар",
-      "director": "Питер Джексон",
+      "title": "Indiana Johns",
+      "director": "Stiven Spilberg",
+      "id": 1,
+      "isDone": true
+    },
+    {
+      "title": "Lord of the rings",
+      "director": "Peter Jackson",
+      "isDone": true,
+      "id": 1655206999251
+    },
+    {
+      "title": "Назад в будущее",
+      "director": "Роберт Земекис",
       "isDone": false,
-      "id": 1655562907750
+      "id": 1655209153491
+    },
+    {
+      "title": "Чужие",
+      "director": "Ридли Скотт",
+      "isDone": false,
+      "id": 1655562907749
     },
     {
       "title": "Аватар",
-      "director": "",
+      "director": "Питер Джексон",
+      "isDone": true,
+      "id": 1655562907750
+    },
+    {
+      "title": "Игра Престолов",
+      "director": "Дэвид Бениофф",
       "isDone": false,
       "id": 1655562907751
+    },
+    {
+      "title": "Гладиатор",
+      "director": "Ридли Скотт",
+      "isDone": false,
+      "id": 1655562907752
     }
   ],
   "contacts": [

@@ -17,7 +17,7 @@ function WatchItem({movie}) {
    function onMovieDelete(e) {
       e.stopPropagation();
       api.delete(`/${movie.id}`)
-         .then(({ status }) => { return status })
+         .then(({ status }) => { return status });
       dispatch(deleteMovie(movie.id)) 
    };
 

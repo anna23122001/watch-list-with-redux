@@ -9,12 +9,10 @@ function WatchForm() {
     const[title, setTitle] = useState('');
     const[director, setDirector] = useState('');
 
-    function onInputChange(e) {
-        if(e.target.name === 'title'){
-            setTitle(e.target.value)}
-        if(e.target.name === 'director'){
-            setDirector(e.target.value)
-        }};
+   function onInputChange(e) {
+		e.target.name === 'title' && setTitle(e.target.value);
+		e.target.name === 'director' && setDirector(e.target.value);
+	}
 
     function onFormSubmit(e) {
         e.preventDefault();
@@ -24,10 +22,8 @@ function WatchForm() {
             isDone: false
         }
     api.post('/', movie)
-        .then(({ data }) => {
-            dispatch(addMovie(data))
-        })
-    .catch(({status}) => console.log(status))
+        .then(({ data }) => dispatch(addMovie(data)))
+        .catch(({status}) => console.log(status))
 }
 
   return (
