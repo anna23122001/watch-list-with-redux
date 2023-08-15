@@ -1,13 +1,22 @@
-import React from 'react';
-import {connect} from 'react-redux';
+import React, { useEffect } from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import WatchItem from '../WatchItem/WatchItem'
-import { deleteMovie, toggleMovie} from '../../store/actions/actions';
-
-// import PropTypes from 'prop-types';
+import { getMovies } from '../../store/actions/actions'
+import api from '../../watch-service'
 
 import './WatchList.css'
 
-function WatchList({movies, deleteMovie, toggleMovie}) {
+function WatchList() {
+  const movies = useSelector((store) => store.movies);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    api.get('/')
+      .then(({ data }) => dispatch(getMovies(data)))
+      .catch(({status}) => console.log(status))
+  }, [dispatch])
+
+  
   return (
     <div>
       {movies.map((movie) => {
@@ -15,28 +24,15 @@ function WatchList({movies, deleteMovie, toggleMovie}) {
           <WatchItem
             key={movie.id}
             movie={movie}
-            onDelete={deleteMovie}
-            onToggle={toggleMovie}
+            // onDelete={deleteMovie}
+            // onToggle={toggleMovie}
           />
         )
       })}
     </div>     
   )}
 
-// WatchList.propTypes = {
-//   onToggle: PropTypes.func,
-//   onDelete: PropTypes.func,
-//   movies: PropTypes.array,
-// }
 
-// WatchList.defaultProps = {
-//   movies: []
-// }
-
-const mapStateToProps = ({movies}) => ({movies})
-
-const mapDispatchToProps = {deleteMovie, toggleMovie}
-
-export default connect(mapStateToProps, mapDispatchToProps) (WatchList);
+export default WatchList;
 
 

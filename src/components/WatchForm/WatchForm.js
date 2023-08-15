@@ -1,27 +1,34 @@
-import React, { useState} from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux'
+import { addMovie } from '../../store/actions/actions'
+import api from '../../watch-service';
 
-function WatchForm({onSubmit}) {
+function WatchForm() {
+    const dispatch = useDispatch();
 
     const[title, setTitle] = useState('');
     const[director, setDirector] = useState('');
 
     function onInputChange(e) {
         if(e.target.name === 'title'){
-            setTitle(e.target.value);
-        }
+            setTitle(e.target.value)}
         if(e.target.name === 'director'){
             setDirector(e.target.value)
-        }
-    }
+        }};
+
     function onFormSubmit(e) {
         e.preventDefault();
-        onSubmit({
+        const movie = {
             title,
             director,
             isDone: false
+        }
+    api.post('/', movie)
+        .then(({ data }) => {
+            dispatch(addMovie(data))
         })
-    }
+    .catch(({status}) => console.log(status))
+}
 
   return (
     <form onSubmit={onFormSubmit}>
@@ -31,24 +38,17 @@ function WatchForm({onSubmit}) {
         value={title}
         onChange={onInputChange}
         />
-       
        <input 
         type='text'
         name='director'
         value={director}
         onChange={onInputChange}
         />
-
         <button className='add'>
             Add
         </button>
-
     </form>
   )
-}
-
-WatchForm.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
 }
 
 export default WatchForm

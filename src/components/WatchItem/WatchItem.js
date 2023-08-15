@@ -1,7 +1,9 @@
 import React from 'react'
-// import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { deleteMovie, toggleMovie } from '../../store/actions/actions';
+import api from '../../watch-service'
+import './WatchItem.css';
 
-import './WatchItem.css'
 
 function toggleBackground(movie) {
     return {
@@ -9,38 +11,39 @@ function toggleBackground(movie) {
     }
 }
 
-function WatchItem({movie, onToggle, onDelete}) {
-  function onMovieDelete(e){
-    e.stopPropagation();
-    onDelete(movie.id)
-  }
+function WatchItem({movie}) {
+   const dispatch = useDispatch();
+
+   function onMovieDelete(e) {
+      e.stopPropagation();
+      api.delete(`/${movie.id}`)
+         .then(({ status }) => { return status })
+      dispatch(deleteMovie(movie.id)) 
+   };
+
+   function onToggle(e) {
+      e.stopPropagation();
+      api.put(`/${movie.id}`, movie)
+         .then(({ data }) => dispatch(toggleMovie(data.id)))
+         .catch(({ status }) => console.log(status))
+   }
+
   return (
      <div 
         className='watch-item'
         style={toggleBackground(movie)}
-        onClick={() => onToggle(movie.id)}
-      >
+        onClick={onToggle}>
        <p className='content'>
           {movie.title} produced by {movie.director}
        </p>
        <span 
        className='delete-btn'
-       onClick={onMovieDelete}>
+           onClick={onMovieDelete}
+        >
           X
        </span>
     </div>
   )
 }
-
-   // WatchItem.propTypes = {
-   //    onToggle: PropTypes.func.isRequired,
-   //    onDelete: PropTypes.func,
-   //    movie: PropTypes.object,
-   // }
-
-   // WatchItem.defaultProps = {
-   //    movie: {}
-   // }
-
 
 export default WatchItem
