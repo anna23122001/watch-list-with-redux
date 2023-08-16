@@ -23,7 +23,8 @@ function WatchItem({movie}) {
 
    function onToggle(e) {
       e.stopPropagation();
-      api.put(`/${movie.id}`, movie)
+      const changedMovie = {...movie, isDone: !movie.isDone}
+      api.put(`/${movie.id}`, changedMovie)
          .then(({ data }) => dispatch(toggleMovie(data.id)))
          .catch(({ status }) => console.log(status))
    }

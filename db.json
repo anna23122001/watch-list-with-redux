@@ -29,13 +29,13 @@
     {
       "title": "Назад в будущее",
       "director": "Роберт Земекис",
-      "isDone": false,
+      "isDone": true,
       "id": 1655209153491
     },
     {
       "title": "Чужие",
       "director": "Ридли Скотт",
-      "isDone": false,
+      "isDone": true,
       "id": 1655562907749
     },
     {
@@ -47,13 +47,13 @@
     {
       "title": "Игра Престолов",
       "director": "Дэвид Бениофф",
-      "isDone": false,
+      "isDone": true,
       "id": 1655562907751
     },
     {
       "title": "Гладиатор",
       "director": "Ридли Скотт",
-      "isDone": false,
+      "isDone": true,
       "id": 1655562907752
     }
   ],
